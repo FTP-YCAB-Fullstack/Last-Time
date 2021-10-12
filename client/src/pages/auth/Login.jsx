@@ -20,8 +20,6 @@ const Login = ({informParent = f => f , clientId, apiUrl}) => {
         dispatch(authLogin(data))
     }
 
-    // const Google = ({ informParent = f => f , clientId, apiUrl}) => {
-    //   console.log(clientId);
 
     const responseGoogle = response => {
       console.log(response);
@@ -44,27 +42,7 @@ const Login = ({informParent = f => f , clientId, apiUrl}) => {
     }
     
     return (
-        // <div>
-        //     <form onSubmit={handleSubmit}>
-        //         <div>
-        //             <label>Email</label>
-        //             <input className="border-2 border-gray-200" name="email" type="email" />
-        //         </div>
-        //         <div>
-        //             <label>Password</label>
-        //             <input className="border-2 border-gray-200" name="password" type="password" />
-        //         </div>
-        //         <button type="submit" >Login</button>
-        //     </form>
-        //     <p>
-        //         Belum punya akun? 
-        //         <Link to="/auth/register" >
-        //             <span className="text-blue-400">
-        //                 Register
-        //             </span>
-        //         </Link>
-        //     </p>
-        // </div>
+       
         <div className='min-h-screen bg-gray-100 text-gray-900 flex justify-center'>
       <ToastContainer />
       <div className='max-w-screen-xl m-0 sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1'>
@@ -147,40 +125,7 @@ const Login = ({informParent = f => f , clientId, apiUrl}) => {
                 </Link>
             </p>
 
-    {/* //           <form
-    //             className='mx-auto max-w-xs relative '
-    //             onSubmit={handleSubmit}
-    //           >
-    //             <input
-    //               className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white'
-    //               type="email"
-    //               name="email"
-    //               placeholder='Email'
-    //             //   onChange={handleChange('email')}
-    //             //   value={email}
-    //             />
-    //             <input
-    //               className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white mt-5'
-    //               type='password'
-    //               name="password"
-    //               placeholder='Password'
-    //             //   onChange={handleChange('password1')}
-    //             //   value={password1}
-    //             />
-    //             <button
-    //               type='submit'
-    //               className='mt-5 tracking-wide font-semibold bg-indigo-500 text-gray-100 w-full py-4 rounded-lg hover:bg-indigo-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none'
-    //             >
-    //               <i className='fas fa-sign-in-alt  w-6  -ml-2' />
-    //               <span className='ml-3'>Sign In</span>
-    //             </button>
-    //             <Link
-    //               to='/users/password/forget'
-    //               className='no-underline hover:underline text-indigo-500 text-md text-right absolute right-0  mt-2'
-    //             >
-    //               Forget password?
-    //             </Link>
-    //           </form> */}
+    
             </div>
           </div>
         </div>
@@ -194,7 +139,6 @@ const Login = ({informParent = f => f , clientId, apiUrl}) => {
       ;
     </div>
     )
-                  // }
                 
 }
 
