@@ -22,7 +22,7 @@ const Home = () => {
                     <Route path="/admin/dashboard" component={Dashboard} />
                     <Route path="/admin/users" component={User} />
                     <Route path="/admin/pickups" component={Pickups} />
-                </Switch>
+                </Switch> 
             </Container>
         </div>
     )

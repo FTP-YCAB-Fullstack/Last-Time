@@ -20,12 +20,16 @@ const Dashboard = () => {
     const {lists} = useSelector(state => state.offices)
     
     return (
-        <div>
-            <ContainerCardDashboard>
-                <CardDashboard color="red" number={totalUsers} text="Total Pengguna" />
-                <CardDashboard number={0} text="Total Sampah Disetor" />
-            </ContainerCardDashboard>
-            <TablePickups data={lists} />
+        <div className="flex flex-col-reverse md:flex-row gap-4 md:gap-10 w-full">
+            <div className="md:w-2/3">
+                <TablePickups data={lists} />
+            </div>
+            <div className="md:w-1/3">
+                <ContainerCardDashboard>
+                    <CardDashboard color="red" number={totalUsers} text="Pengguna" />
+                    <CardDashboard icon="trash" number={0} text="Sampah Disetor" />
+                </ContainerCardDashboard>
+            </div>
         </div>
     )
 }
