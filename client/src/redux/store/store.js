@@ -1,3 +1,4 @@
+
 import {createStore , combineReducers, applyMiddleware} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension'
 import thunk from 'redux-thunk'
@@ -14,6 +15,20 @@ const store = createStore(
         adminCount:adminCountReducer,
         offices: officesReducer,
         delete: storeDeleteReducer,
+    }),
+    composedEnhancer
+)
+
+import {createStore , combineReducers, applyMiddleware} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
+import userReducer from '../reducers/userReducer';
+
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunk))
+
+const store = createStore(
+    combineReducers({
+        user: userReducer
     }),
     composedEnhancer
 )
