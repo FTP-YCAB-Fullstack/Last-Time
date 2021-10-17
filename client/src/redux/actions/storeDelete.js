@@ -1,4 +1,3 @@
-
 export const setIdDelete = (id , url) => {
     return {
         type: "SET_ID",
