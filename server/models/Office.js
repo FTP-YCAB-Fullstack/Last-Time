@@ -21,14 +21,12 @@ OfficeSchema.post('save' , () => {
     console.log('after save office')
 })
 
-OfficeSchema.pre('remove' , (next) => {
+OfficeSchema.pre('remove' , {document: false , query: true} , () => {
     console.log('before remove office')
-    next()
 })
 
-OfficeSchema.post('remove' , (next) => {
+OfficeSchema.post('remove' , {document: false , query: true}  , () => {
     console.log('after remove office')
-    next()
 }) */
 
 

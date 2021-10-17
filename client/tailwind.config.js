@@ -6,7 +6,7 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx,vue}',
   ],
   // mode: 'jit',
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media', // or 'media' or 'class'
   theme: {
     extend: {
     },

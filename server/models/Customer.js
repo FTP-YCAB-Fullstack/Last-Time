@@ -10,10 +10,17 @@ const CustomerSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "offices"
         },
+        address: {
+            type:String,
+            required: true,
+        },
         status: {
             type: String,
             default: "waiting",
             enum: ["waiting" , "accepted" , "reject"]
+        },
+        reason: {
+            type: String,
         }
     },
     {timestamps: true}

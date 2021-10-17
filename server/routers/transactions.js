@@ -10,6 +10,7 @@ router.get('/transactions/user' , authentication , authorization(['user']) , tra
 router.post('/transactions/user' , authentication , authorization(['user']) , transactionController.createByToken)
 router.get('/transactions/status/count' , authentication , transactionController.countEachStatus)
 router.get('/transactions/:id', authentication , transactionController.getDetail)
+router.get('/transactions/:id/office' , authentication , authorization(['admin']) , transactionController.getByOffice)
 router.delete('/transactions/:id' , authentication , transactionController.delete)
 router.patch('/transactions/:id/receive' , authentication , authorization(['user']) , Upload.single('image') , transactionController.receiveTransaction)
 router.patch('/transactions/:id/status' , authentication , transactionController.updateStatus)

@@ -46,7 +46,15 @@ class OfficeController {
     static getDetail = async (req,res,next) => {
         const {id} = req.params
         try {
-            const office = await Office.findById(id)  
+            const office = await Office.findById(id).populate('user' , 'name email')
+                                    .populate({
+                                        path: 'customers',
+                                        select: 'address status',
+                                        populate: {
+                                            path: 'user',
+                                            select: 'email name'
+                                        }
+                                    })
             if(!office) return next({name: "NotFound"})
             res.status(200).json({office})
         } catch (error) {

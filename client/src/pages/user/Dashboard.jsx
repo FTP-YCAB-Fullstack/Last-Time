@@ -4,11 +4,10 @@ import CardDashboard from '../../components/user/CardDashboard'
 const Dashboard = () => {
     return (
         <div>
-            <h1>Dashboard</h1>
-            <div className="flex flex-col md:flex-row gap-6 w-3/4 mx-auto">
-                <CardDashboard to="/user/pickup" text="Angkut Sampah" />
-                <CardDashboard to="/user/exhibition" text="Pameran Kreatif" />
-                <CardDashboard to="/user/store" text="Toko Kreatif" />
+            <div className="flex flex-col md:flex-row gap-6 mx-auto">
+                <CardDashboard icon="truck" to="/user/pickup" text="Angkut Sampah" />
+                <CardDashboard icon="gallery" to="/user/exhibition" color="blue" text="Pameran Kreatif" />
+                <CardDashboard icon="cart" to="/user/store" color="indigo" text="Toko Kreatif" />
             </div>
         </div>
     )
