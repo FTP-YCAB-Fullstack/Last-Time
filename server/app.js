@@ -35,9 +35,8 @@ app.use(handleError)
 
 
 
-const {DB_HOST , DB_PORT , DB_NAME} = process.env
-const dbURI = `mongodb://${DB_HOST}:${DB_PORT}/${DB_NAME}`
-mongoose.connect(dbURI)
+const DB_URI = process.env.DB_URI
+mongoose.connect(DB_URI)
     .then(() => 
         app.listen(port, () => {
             console.log('connection database success')
