@@ -5,15 +5,12 @@ export const authLogin = (data) => {
         try {
             let result = await axios.post('/users/login' , data)
             dispatch(setLogin(result.data))
-            return result.status
-            /* return axios.post('/users/login' , data)
-                .then(result => {
-                    dispatch(setLogin(result.data))
-                    return result.status
-                })
-                .catch(err => console.log(err)) */
+            return {status: result.status}
         } catch (error) {
-            console.log(error)
+            return {
+                status: error.response.status,
+                message: error.response.data.message,
+            }
         }
     }
 }
