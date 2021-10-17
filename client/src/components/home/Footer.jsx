@@ -2,9 +2,9 @@ import React from 'react'
 
 const Footer = () => {
     return (
-        <div>
-            <h1>Ini Footer</h1>
-        </div>
+        <footer className="py-2 text-center text-white bg-teal-700 text-sm ">
+            <p>&copy; 2021 TivAsh. All rights reserved.</p>
+        </footer>
     )
 }
 
