@@ -2,7 +2,7 @@ const Transaction = require('../models/Transaction')
 const Office = require('../models/Office')
 const Customer = require('../models/Customer')
 const User = require('../models/User')
-
+const moment = require('moment');
 class TransactionController {
     static getAll = async (req,res,next) => {
         try {
@@ -40,17 +40,31 @@ class TransactionController {
                 // get office id by user
                 let office = await Office.findOne({user: user.id})
                 transactions = await Transaction.find({office: office._id})
+                                    .sort([['createdAt' , -1]])
                                     .populate("user" , "name")
                 transactions = transactions.map(transaction => {
                     return {
                         _id: transaction._id,
-                        user: transaction.user.name,
-                        status: transaction.status
+                        user: transaction.user.name,    
+                        status: transaction.status,
+                        createdAt: moment(transaction.createdAt).fromNow()
                     }
                 })
             } else {
                 transactions = await Transaction.find({user: user._id})
+                                            .sort([['createdAt' , -1]])
                                             .select('status poin createdAt')
+                                            .transform(res=> {
+                                                return res.map(item => {
+                                                    let created = moment(item.createdAt).fromNow()
+                                                    return {
+                                                        _id: item._id,
+                                                        status: item.status,
+                                                        poin: item.poin,
+                                                        createdAt: created
+                                                    }
+                                                })
+                                            })
             }
             res.status(200).json(transactions)
         } catch (error) {
@@ -114,9 +128,42 @@ class TransactionController {
     static getDetail = async(req,res,next) => {
         const {id} = req.params
         try {
-            const transaction = await Transaction.findById(id) 
+            const transaction = await Transaction.findById(id)
+                                        .populate('user' , 'name email')
+                                        .transform(item => {
+                                            if(item) {
+                                                let {_id,user,office,status,poin,rubbish, images,createdAt,updatedAt} = item
+                                                return {
+                                                    _id,user,office,status,poin,rubbish,images,
+                                                    createdAt: moment(createdAt).fromNow(),
+                                                    updatedAt: moment(updatedAt).fromNow(),
+                                                }
+                                            } else return next({name: "NotFound"})
+                                        })
             if(!transaction) return next({name: "NotFound"})
             res.status(200).json(transaction)
+        } catch (error) {
+            next(error)
+        }
+    }
+
+    static getByOffice = async(req,res,next) => {
+        const {id} = req.params
+        try {
+            const transactions = await Transaction.find({office: id})
+                                        .select('user status poin')
+                                        .populate('user' , 'name')
+                                        .transform(transactions => {
+                                            if(transactions.length) {
+                                                return transactions.map(transaction => {
+                                                    let {_id , user, status,poin} = transaction
+                                                    return {
+                                                        _id,status,poin,user: user.name
+                                                    }
+                                                })
+                                            } else return next({name: "NotFound"})
+                                        })
+            res.status(200).json({transactions})
         } catch (error) {
             next(error)
         }
