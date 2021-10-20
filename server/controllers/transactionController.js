@@ -34,12 +34,14 @@ class TransactionController {
 
     static getByToken = async(req,res,next) => {
         let user = req.currentUser
+        let status = req.query.status
+        if(!status) status = 'done'
         try {
             let transactions = null
             if(user.subRole.includes('pickuper')) {
                 // get office id by user
                 let office = await Office.findOne({user: user.id})
-                transactions = await Transaction.find({office: office._id})
+                transactions = await Transaction.find({office: office._id ,  status: status })
                                     .sort([['createdAt' , -1]])
                                     .populate("user" , "name")
                 transactions = transactions.map(transaction => {
