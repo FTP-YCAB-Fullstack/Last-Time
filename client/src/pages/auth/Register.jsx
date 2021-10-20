@@ -30,10 +30,10 @@ const RegisterComponent = () => {
     }
     
     return (
-        <div className='min-h-screen bg-gray-100 text-gray-900 flex justify-center'>
+      <div className='min-h-screen bg-gray-100 dark:bg-gray-800 dark:text-gray-100 text-gray-900 flex justify-center'>
       {/* {isAuth() ? <Redirect to='/' /> : null} */}
       <ToastContainer />
-      <div className='max-w-screen-xl m-0 sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1'>
+        <div className='max-w-screen-xl dark:bg-gray-700 m-0 sm:m-20 bg-white shadow sm:rounded-lg flex justify-center flex-1'>
         <div className='lg:w-1/2 xl:w-5/12 p-6 sm:p-12'>
           <div className='mt-12 flex flex-col items-center'>
             <h1 className='text-2xl xl:text-3xl font-extrabold'>
@@ -43,25 +43,25 @@ const RegisterComponent = () => {
             <form onSubmit={handleSubmit(onSubmit)} className='w-full flex-1 mt-8 text-teal-500'>
                   <div className='mx-auto mb-4 max-w-xs relative '>
                       <label className="mb-1 block">Nama</label>
-                      <input {...register('name')}  type="text" className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white' />
+                  <input {...register('name')} type="text" className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white dark:bg-gray-600 ark:border-gray-800 dark:focus:bg-gray-700 transition duration-200' />
                       <small className="error text-red-400 font-bold">{errors.name?.message}</small>
                   </div>
                   <div className='mx-auto mb-4 max-w-xs relative '>
                       <label className="mb-1 block">Email</label>
-                      <input {...register('email')}  type="email" className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white' />
+                      <input {...register('email')}  type="email" className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white dark:bg-gray-600 ark:border-gray-800 dark:focus:bg-gray-700 transition duration-200' />
                       <small className="error text-red-400 font-bold">{errors.email?.message}</small>
                   </div>
                   <div className='mx-auto mb-4 max-w-xs relative '>
                     <label className="mb-1 block">Password</label>
-                    <input {...register('password')}  type="password" className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white' />
+                    <input {...register('password')}  type="password" className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white dark:bg-gray-600 ark:border-gray-800 dark:focus:bg-gray-700 transition duration-200' />
                       <small className="error text-red-400 font-bold">{errors.password?.message}</small>
                   </div>
                   <div className='mx-auto mb-4 max-w-xs relative '>
                       <label className="mb-1 block">Konfirmasi Password</label>
-                      <input {...register('password_confirmation')}  type="password" className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white' />
+                      <input {...register('password_confirmation')}  type="password" className='w-full px-8 py-4 rounded-lg font-medium bg-gray-100 border border-gray-200 placeholder-gray-500 text-sm focus:outline-none focus:border-gray-400 focus:bg-white dark:bg-gray-600 ark:border-gray-800 dark:focus:bg-gray-700 transition duration-200' />
                       <small className="error text-red-400 font-bold">{errors.password_confirmation?.message}</small>
                   </div>
-              <button className='mt-5 mx-auto mb-4 max-w-xs relative tracking-wide font-semibold bg-teal-400 text-gray-100 w-full py-4 rounded-lg hover:bg-teal-500 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none'>Daftar</button>
+                <button className='mt-5 mx-auto mb-4 max-w-xs relative tracking-wide font-semibold bg-teal-400 text-gray-100 w-full py-4 rounded-lg hover:bg-teal-500 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none dark:bg-teal-600'>Daftar</button>
               </form>
               <p className="mt-4">
                   Sudah punya akun?
