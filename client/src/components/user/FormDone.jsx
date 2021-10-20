@@ -17,7 +17,12 @@ const InputCategoryy = ({label , register, errors , name}) => {
         <div className="my-2 md:my-4">
             <div className="flex flex-col md:flex-row md:gap-4">
                 <label className="py-2 md:px-4 w-28">{label}</label>
-                <input {...register(name)} defaultValue={0} min={0} className="bg-white dark:bg-gray-600 py-2 px-4 shadow-md rounded-md focus:outline-none focus:ring-4" type="number" placeholder="Berat" />
+                <div className="flex items-center relative rounded overflow-hidden">
+                    <input {...register(name)} defaultValue={0} min={0} className="bg-white dark:bg-gray-600 py-2 px-4 pr-10 text-right shadow-md rounded-md focus:outline-none focus:ring-4" type="number" placeholder="Berat" />
+                    <div className="absolute right-0 bg-teal-400 dark:bg-teal-700 text-white py-2 px-4 ">
+                        Kg
+                    </div>
+                </div>
             </div>
             <small className="error text-red-400 font-bold">{errors[name]?.message}</small>
         </div>
@@ -83,7 +88,7 @@ const FormDone = ({id , token , setDoneId}) => {
                 <div className="my-6">
                     <div className="flex flex-col md:flex-row md:gap-4">
                     <label className="py-2 px-4 w-28">Poin</label>
-                    <input {...register('poin')} defaultValue={0} min={0} className="bg-white dark:bg-gray-600 py-2 px-4 shadow-md rounded-md focus:outline-none focus:ring-4" type="number" />
+                    <input {...register('poin')} defaultValue={0} min={0} className="bg-white dark:bg-gray-600 py-2 px-4 shadow-md text-right rounded-md focus:outline-none focus:ring-4" type="number" />
                     </div>
                     <small className="error text-red-400 font-bold">{errors.poin?.message}</small>
                 </div>
