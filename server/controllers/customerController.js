@@ -67,8 +67,19 @@ class CustomerController {
     static getByToken = async(req,res,next) => {
         let id = req.currentUser._id
         let office = await Office.findOne({user: id})
+        let status = req.query.status
+        if(!status) status = 'waiting'
+        console.log(`status => ` + status)
         try {
-            let customers = await Customer.find({office: office._id})
+            // count data by category
+            let count = {
+                waiting: await Customer.find({office: office._id , status: 'waiting'}).count(),
+                accepted: await Customer.find({office: office._id , status: 'accepted'}).count(),
+                reject: await Customer.find({office: office._id , status: 'reject'}).count(),
+            }
+            
+            // set all data customer
+            let customers = await Customer.find({office: office._id , status: status})
                                 .select("user status address")
                                 .populate("user" , "name")
             customers = customers.map(customer => {
@@ -79,7 +90,8 @@ class CustomerController {
                     address: customer.address,
                 }
             })
-            res.status(200).json({customers})
+
+            res.status(200).json({ count, customers})
         } catch (error) {
             next(error)
         }

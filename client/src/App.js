@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import {BrowserRouter as Router , Switch , Route} from 'react-router-dom'
-import Home from './pages/home/'
+import Home from './pages/home'
 import User from './pages/user'
 import Admin from './pages/admin'
 import Auth from './pages/auth'
