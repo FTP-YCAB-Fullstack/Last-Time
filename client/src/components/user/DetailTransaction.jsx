@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router'
 import axios from '../../axios'
-
+import {motion} from 'framer-motion'
 
 const CategoryTrash = ({rubbishes , keyword }) => {
     return (
@@ -55,25 +55,34 @@ const DetailTransaction = () => {
             <h1 className="text-2xl font-bold mb-2">Detail Transaksi</h1>
             <div className="italic mb-4">Status : {data.status}</div>
             <div className="flex flex-col mb-4 md:flex-row justify-between w-full">
-                <div className="mb-4 md:mb-0">
+                <motion.div 
+                    initial={{ opacity: 0,x: -80 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.6 }}
+                className="mb-4 md:mb-0">
                     <h3 className="font-semibold text-lg">Kategori Sampah</h3>
                     <CategoryTrash rubbishes={rubbishes} keyword="paper" />
                     <CategoryTrash rubbishes={rubbishes} keyword="glass" />
                     <CategoryTrash rubbishes={rubbishes} keyword="plastic" />
                     <CategoryTrash rubbishes={rubbishes} keyword="iron" />
                     <CategoryTrash rubbishes={rubbishes} keyword="cardboard" />
-                </div>
+                </motion.div>
                 {
                     data.status !== 'reject' ?
-                        <div className="md:w-2/3">
-                            <div className="h-72 overflow-hidden bg-gray-400 rounded shadow-lg flex items-center justify-center">
+                        <motion.div 
+                            initial={{ opacity: 0, x: 80 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.6 }}
+                        className="md:w-2/3">
+                            <div 
+                            className="h-72 overflow-hidden bg-gray-400 rounded shadow-lg flex items-center justify-center">
                                 <img alt="trash foto" className="w-full transform hover:scale-110 transition duration-500" src={process.env.REACT_APP_API + `assets/${data.images}`} />
                             </div>
                             <div className="flex w-full flex-row justify-between mt-3">
                                 <small>Created: {data.createdAt}</small>
                                 <small>Updated: {data.updatedAt}</small>
                             </div>
-                        </div>
+                        </motion.div>
                     : ""
                 }
             </div>

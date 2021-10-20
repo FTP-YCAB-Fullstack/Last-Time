@@ -2,6 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleModalDel } from '../redux/actions/storeDelete'
 import axios from '../axios'
+import {motion} from 'framer-motion'
 
 const ModalDelete = ({}) => {
     const auth = useSelector(state => state.auth)
@@ -23,8 +24,16 @@ const ModalDelete = ({}) => {
 
     
     return (
-        <div style={{zIndex: 100}} className="w-screen h-screen bg-gray-800 bg-opacity-25 fixed top-0 left-0 flex items-center justify-center">
-            <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-600 dark:text-gray-100 text-gray-600 shadow-lg text-center p-8 w-5/6 md:w-1/3 rounded-lg">
+        <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.3 }}
+        style={{zIndex: 100}} className="w-screen h-screen bg-gray-800 bg-opacity-25 fixed top-0 left-0 flex items-center justify-center">
+            <motion.form 
+                initial={{ opacity: 0, y: -120 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 , delay: 0.3}}
+            onSubmit={handleSubmit} className="bg-white dark:bg-gray-600 dark:text-gray-100 text-gray-600 shadow-lg text-center p-8 w-5/6 md:w-1/3 rounded-lg">
                 <p className="text-sm md:text-2xl mb-8">Apakah kamu yakin akan menghapus data yang dipilih?</p>
                 <div className="flex justify-around">
                     <button onClick={() => dispatch(toggleModalDel())} type="button" className="flex flex-row gap-2 bg-gray-400 dark:bg-gray-500 text-white font-semibold py-2 px-4 rounded hover:bg-gray-500 dark:hover:bg-gray-600 transition duration-200">
@@ -40,8 +49,8 @@ const ModalDelete = ({}) => {
                         <span>Hapus</span>
                     </button>
                 </div>
-            </form>
-        </div>
+            </motion.form>
+        </motion.div>
     )
 }
 

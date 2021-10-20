@@ -4,6 +4,7 @@ import CardDashboard from '../../components/admin/CardDashboard'
 import ContainerCardDashboard from '../../components/admin/ContainerCardDashboard'
 import TablePickups from '../../components/admin/TablePickups'
 import { fetchListOffices } from '../../redux/actions/offices'
+import {motion} from 'framer-motion'
 
 const Dashboard = () => {
     const dispatch = useDispatch()
@@ -26,8 +27,14 @@ const Dashboard = () => {
             </div>
             <div className="md:w-1/3">
                 <ContainerCardDashboard>
-                    <CardDashboard color="red" number={totalUsers} text="Pengguna" />
-                    <CardDashboard icon="trash" number={0} text="Sampah Disetor" />
+                    <motion.div
+                        initial={{ opacity: 0, x: 120 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <CardDashboard color="red" number={totalUsers} text="Pengguna" />
+                    </motion.div>
+                    {/* <CardDashboard icon="trash" number={0} text="Sampah Disetor" /> */}
                 </ContainerCardDashboard>
             </div>
         </div>

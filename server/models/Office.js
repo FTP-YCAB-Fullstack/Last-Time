@@ -1,4 +1,5 @@
 const {Schema , model} = require('mongoose')
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const OfficeSchema = new Schema(
     {
@@ -11,6 +12,8 @@ const OfficeSchema = new Schema(
     },
     {timestamps: true}
 )
+
+OfficeSchema.plugin(mongoosePaginate)
 
 /* OfficeSchema.pre('save' , (next) => {
     console.log('before save office')

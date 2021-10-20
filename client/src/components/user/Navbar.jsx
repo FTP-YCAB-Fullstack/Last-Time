@@ -38,7 +38,7 @@ const Navbar = () => {
                 <div>
                 </div>
                 <div className="flex gap-6 font-semibold text-lg">
-                    <Link to="/user/dashboard">
+                    {/* <Link to="/user/dashboard">
                         <div>
                             Dashboard
                         </div>
@@ -47,8 +47,8 @@ const Navbar = () => {
                         <div>
                             Angkut
                         </div>
-                    </Link>
-                    <Link to="/user/exhibition">
+                    </Link> */}
+                    {/* <Link to="/user/exhibition">
                         <div>
                             Pameran
                         </div>
@@ -57,30 +57,30 @@ const Navbar = () => {
                         <div>
                             Toko
                         </div>
-                    </Link>
-                    <div className="cursor-pointer text-red-400" onClick={handleLogout}>
+                    </Link> */}
+                    <div className="cursor-pointer text-white" onClick={handleLogout}>
                         Logout
                     </div>
                 </div>
             </div>
-            <div className="bg-teal-400 dark:bg-teal-800 z-50 shadow-md text-teal-100 md:hidden flex flex-row justify-around py-2 fixed bottom-0 w-screen">
-                <Link to="/user/dashboard">
+            {/* <div className="bg-teal-400 dark:bg-teal-800 z-50 shadow-md text-teal-100 md:hidden flex flex-row justify-around py-2 fixed bottom-0 w-screen"> */}
+                {/* <Link to="/user/dashboard">
                     <div className="flex flex-col items-center hover:opacity-60 transition duration-200">
                             <div className="h-7 flex items-center">
                                 {icons['dashboard']}
                             </div>
                             <small className="text-xs">Home</small>
                     </div>
-                </Link>
-                <Link to="/user/pickup">
+                </Link> */}
+                {/* <Link to="/user/pickup">
                     <div className="flex flex-col items-center hover:opacity-60 transition duration-200">
                         <div className="h-7 flex items-center">
                             {icons['truck']}
                         </div>
                         <small className="text-xs">Angkut</small>
                     </div>
-                </Link>
-                <Link to="/user/exhibition" >
+                </Link> */}
+                {/* <Link to="/user/exhibition" >
                     <div className="flex flex-col items-center hover:opacity-60 transition duration-200">
                         <div className="h-7 flex items-center">
                             {icons['gallery']}
@@ -89,20 +89,20 @@ const Navbar = () => {
                     </div>
                 </Link>
                 <Link to="/user/store" >
-                    <div className="flex flex-col items-center hover:opacity-60 transition duration-200">
+                    <div className="flex flex-col items-center hover:opacity-60 transition duration-200">\
                         <div className="h-7 flex items-center">
                             {icons['cart']}
                         </div>
                         <small className="text-xs">Toko</small>
                     </div>
-                </Link>
-                <div className="flex flex-col items-center cursor-pointer hover:opacity-60 transition duration-200 text-red-300" onClick={handleLogout}> 
+                </Link> */}
+                {/* <div className="flex flex-col items-center cursor-pointer hover:opacity-60 transition duration-200" onClick={handleLogout}> 
                     <div className="h-7 flex items-center">
                         {icons['logout']}
                     </div>
                     <small className="text-xs">Keluar</small>
                 </div>
-            </div>
+            </div> */}
         </>
     )
 }

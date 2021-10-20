@@ -2,7 +2,7 @@ import React from 'react'
 import axios from '../../axios'
 import {Link} from 'react-router-dom'
 
-const TablePickupTrash = ({transactions , listenCustomer, setListenCustomer , token , setDoneId}) => {
+const TablePickupTrash = ({transactions , statusTransaction , listenCustomer, setListenCustomer , token , setDoneId}) => {
     const handleStatus = async (e) =>{
         let id = null
         let status = null
@@ -36,13 +36,13 @@ const TablePickupTrash = ({transactions , listenCustomer, setListenCustomer , to
     
     return (
         <div className="my-6">
-            <h2 className="text-xl font-bold mb-2">Data Angkut Sampah</h2>
+                <h2 className="text-xl font-bold mb-2">Data Angkut Sampah</h2>
+                <h4 className="mb-2 text-teal-400">Status : {statusTransaction}</h4>
                 <table className="table-auto hidden md:table overflow-hidden bg-white dark:bg-gray-700 shadow-md w-full rounded">
                     <thead className="text-teal-500 dark:text-teal-300 dark:bg-teal-700 h-10 bg-teal-100">
                         <tr>
                             <th>No</th>
                             <th>Pelanggan</th>
-                            <th>Status</th>
                             <th>Waktu</th>
                             <th>Aksi</th>
                         </tr>
@@ -54,7 +54,6 @@ const TablePickupTrash = ({transactions , listenCustomer, setListenCustomer , to
                                     <tr key={transaction._id}>
                                         <td className="text-center">{i+1}</td>
                                         <td>{transaction.user}</td>
-                                        <td className="text-center">{transaction.status}</td>
                                         <td>{transaction.createdAt}</td>
                                         <td data-id={transaction._id} className="flex gap-3 justify-center py-2">
                                             {

@@ -1,5 +1,6 @@
-import React from 'react'
-import {Switch , Route} from 'react-router-dom'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
+import {Switch , Route , useHistory} from 'react-router-dom'
 import Navbar from '../../components/user/Navbar'
 import Dashboard from './Dashboard'
 import Pickup from './Pickup'
@@ -13,9 +14,18 @@ const Container = ({children}) => {
 }
 
 const User = () => {
+    const dispatch = useDispatch()
+    const history = useHistory()
+    useEffect(() => {
+        dispatch({ type: "FROM_HOME_FALSE" })
+    }, [])
+    useEffect(() => {
+        dispatch({ type: "SET_PATH", payload: { path: history.location.pathname } })
+    })
+    
     return (
         <div className="bg-gray-50 dark:bg-gray-800 pb-10 text-gray-600 dark:text-gray-300 min-h-screen">
-            <Navbar />
+            {/* <Navbar /> */}
             <Container>
                 <Switch>
                     <Route path="/user/dashboard" component={Dashboard} />

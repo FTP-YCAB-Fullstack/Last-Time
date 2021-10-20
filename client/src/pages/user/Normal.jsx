@@ -1,12 +1,21 @@
 import React , {useEffect, useState} from 'react'
-import { useSelector } from 'react-redux'
+import {useHistory} from 'react-router-dom'
+import { useSelector , useDispatch } from 'react-redux'
 import axios from '../../axios'
 import ModalAddress from '../../components/user/ModalAddress'
 import TableHistory from '../../components/user/TableHistory'
 import TableOffice from '../../components/user/TableOffice'
+import {motion} from 'framer-motion'
+import { setLogout } from '../../redux/actions/auth'
 
+const RightSide = ({status, customer , poinUser , loading , statusPickup , handlePickup}) => {
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const handleLogout = () => {
+        dispatch(setLogout())
+        history.replace('/')
+    }
 
-const RightSide = ({status, customer , poinUser , statusPickup , handlePickup}) => {
     return (
         status && customer && customer.status !== 'reject' ?
                     <div className="flex flex-col md:mb-10 gap-4 md:gap-10">
@@ -21,10 +30,19 @@ const RightSide = ({status, customer , poinUser , statusPickup , handlePickup}) 
                                 customer && customer.status === 'accepted' ?
                                     statusPickup === 'waiting' ?
                                         <div className="bg-gray-400 text-white py-2 px-6 rounded-md font-semibold">Menunggu</div>
-                                    : <button onClick={handlePickup} className="bg-teal-400 dark:bg-teal-600 transition duration-200 hover:bg-teal-500 flex flex-row gap-2 text-white py-2 px-6 rounded-md font-semibold">
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z" />
-                                        </svg>
+                                : <button onClick={handlePickup} disabled={loading ? true : false}  className="bg-teal-400 dark:bg-teal-600 transition duration-200 hover:bg-teal-500 flex flex-row gap-2 text-white py-2 px-6 rounded-md font-semibold">
+                                        {
+                                            loading ?
+                                                <svg version="1.1" className="h-6 w-6 animate-spin" strokeWidth="4px" id="L9" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
+                                                    viewBox="0 0 100 100" enableBackground="new 0 0 0 0" >
+                                                    <path fill="#fff" d="M73,50c0-12.7-10.3-23-23-23S27,37.3,27,50 M30.9,50c0-10.5,8.5-19.1,19.1-19.1S69.1,39.5,69.1,50">
+                                                    </path>
+                                                </svg>
+                                            : 
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.933 12.8a1 1 0 000-1.6L6.6 7.2A1 1 0 005 8v8a1 1 0 001.6.8l5.333-4zM19.933 12.8a1 1 0 000-1.6l-5.333-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.333-4z" />
+                                                </svg>
+                                        }
                                         <span>Angkut Sampah</span>
                                     </button>
                                 :   <div className="bg-gray-400 text-white py-2 px-6 rounded-md font-semibold
@@ -41,6 +59,14 @@ const RightSide = ({status, customer , poinUser , statusPickup , handlePickup}) 
                                 <span>{customer.office}</span>
                             </h4>
                         </div>
+                        <button onClick={handleLogout} className="text-center flex flex-row justify-center inline-block w-2/3 gap-2 bg-red-300 dark:bg-red-800 text-red-100 dark:text-red-200 font-semibold py-2 px-2 text-sm md:text-base md:px-4 rounded dark:hover:bg-red-700 hover:bg-red-400 transition duration-200">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+                            </svg>
+                            <div>
+                            Keluar
+                            </div>
+                        </button>
                     </div>
                 : null
     )
@@ -58,6 +84,7 @@ const Normal = () => {
     const [poinUser, setPoinUser] = useState(0)
     const [statusPickup, setStatusPickup] = useState(null)
     const [listenButton, setListenButton] = useState(0)
+    const [loadPikcup , setLoadPickup] = useState(false)
     
     useEffect( () => {
         (async () => {
@@ -92,7 +119,9 @@ const Normal = () => {
     }, [status , listenButton])
 
     const handlePickup = async () => {
+        setLoadPickup(true)
         let response = await axios.post(`/transactions/user`, {} , {headers: {token}})
+        if(response) setLoadPickup(false)
         if(response.status === 200) setListenButton(listenButton+1)
     }
 
@@ -102,7 +131,11 @@ const Normal = () => {
     
     return (
         <div className="flex flex-col-reverse mx-auto md:w-full md:flex-row gap-8">
-            <div className="w-full md:w-3/4">
+            <motion.div 
+                initial={{ opacity: 0, y: 80 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+            className="w-full md:w-3/4">
                 {
                     status && customer && customer.status !== 'reject'  ?
                         <TableHistory data={histories} />
@@ -124,10 +157,14 @@ const Normal = () => {
                             <TableOffice data={offices} setSelectOffice={setSelectOffice} />
                         </div>
                 }
-            </div>
-            <div className="w-full md:w-1/4">
-                <RightSide status={status} customer={customer} poinUser={poinUser} statusPickup={statusPickup} handlePickup={handlePickup} />
-            </div>
+            </motion.div>
+            <motion.div 
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+            className="w-full md:w-1/4">
+                <RightSide status={status} loading={loadPikcup} customer={customer} poinUser={poinUser} statusPickup={statusPickup} handlePickup={handlePickup} />
+            </motion.div>
         </div>
     )
 }

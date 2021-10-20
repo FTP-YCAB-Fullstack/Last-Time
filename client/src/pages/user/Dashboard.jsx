@@ -1,8 +1,10 @@
 import React from 'react'
+import { Redirect } from 'react-router'
 import CardDashboard from '../../components/user/CardDashboard'
 
 const Dashboard = () => {
-    return (
+
+    /* return (
         <div>
             <div className="flex flex-col md:flex-row gap-6 mx-auto">
                 <CardDashboard icon="truck" to="/user/pickup" text="Angkut Sampah" />
@@ -10,7 +12,8 @@ const Dashboard = () => {
                 <CardDashboard icon="cart" to="/user/store" color="indigo" text="Toko Kreatif" />
             </div>
         </div>
-    )
+    ) */
+    return <Redirect to="/user/pickup" />
 }
 
 export default Dashboard
