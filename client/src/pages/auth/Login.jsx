@@ -2,7 +2,7 @@ import React, { useState, Component , useEffect} from 'react'
 import axios from 'axios'
 import { Link , useHistory } from 'react-router-dom'
 import {useDispatch} from 'react-redux' 
-import { authLogin , setLogin } from '../../redux/actions/auth'
+import { authLogin , setLogin } from '../../redux/actionss/auth'
 import { ToastContainer, toast } from 'react-toastify';
 import { GoogleLogin } from 'react-google-login';
 import FacebookLogin from 'react-facebook-login/dist/facebook-login-render-props';

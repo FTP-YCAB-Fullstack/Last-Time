@@ -1,6 +1,7 @@
 const User = require('../models/User')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const Redis = require('../utils/Redis')
 
 class UserController {
     static register = async (req,res,next) => {
@@ -119,11 +120,15 @@ class UserController {
     }
 
     static getByRole = async (req,res,next) => {
-        const {role} = req.params
+        let {role} = req.params
+        let page = req.page
         try {
-            const users = role === 'admin' ?
-                    await User.find({role}).select("name email")
-                    : await User.find({role , subRole: 'normal'}).select("name email")
+            const users = await Redis.getOrSet(`users?role=${role}&page=${page}` , async () => {
+                return await User.paginate({ role: role, subRole: 'normal' }, { select: 'name email', page: page , limit: 20 }, (err, result) => {
+                    if (err) return next(err)
+                    return result
+                })
+            })
             res.status(200).send({users})
         } catch (error) {
             next(error)
@@ -132,13 +137,30 @@ class UserController {
 
     static getBySubRole = async (req,res,next) => {
         const {subRole} = req.params
+        let page = req.page
         try {
-            const users = await User.find({subRole , role: "user"}).select("name email")
+            const users = await Redis.getOrSet(`users?subRole=${subRole}&page=${page}` , async() => {
+                return await User.paginate({role: 'user' , subRole} , {select: 'name email' , page: page , limit: 20} , (err , result) => {
+                    if(err) return next(err)
+                    return result
+                })
+            })
             res.status(200).send({users})
         } catch (error) {
             next(error)
         }
     }
+
+    // static googleLogin = async(req,res,next)=>{
+    //     var token = req.user.token;
+    //     res.redirect("http://localhost:3000?token=" + token);
+    // }
+
+    // static auth = async(req,res,next)=>{
+    //     passport.authenticate("google", {scope:["profile", "email"]})
+    // }
+
+
 
 }
 
