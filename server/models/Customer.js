@@ -1,5 +1,14 @@
 const {Schema, model} = require('mongoose')
 
+const LocationSchema = new Schema({
+    latitude: {
+        type: String,
+    },
+    longitude: {
+        type: String,
+    }
+})
+
 const CustomerSchema = new Schema(
     {
         user: {
@@ -19,6 +28,7 @@ const CustomerSchema = new Schema(
             default: "waiting",
             enum: ["waiting" , "accepted" , "reject"]
         },
+        location: LocationSchema,
         reason: {
             type: String,
         }
