@@ -30,9 +30,9 @@ const Navigation = () => {
 const TableCustomerOffice = ({office}) => {
     return (
         <div>
-            <table className="bg-white hidden md:table w-full shadow-md rounded-lg overflow-hidden">
+            <table className="bg-white dark:bg-gray-600 hidden md:table w-full shadow-md rounded-lg overflow-hidden">
                 <thead>
-                    <tr className="h-10 text-teal-500 bg-teal-50">
+                    <tr className="h-10 text-teal-500 bg-teal-50 dark:bg-teal-800 dark:text-teal-300">
                         <th>No</th>
                         <th>Name</th>
                         <th>Email</th>
@@ -86,18 +86,22 @@ const TableTransactionOffice = ({id}) => {
     const [transactions, setTransactions] = useState([])
     useEffect(() => {
         (async() => {
-            let result = await axios.get(`/transactions/${id}/office` , {headers: {token}})
-            if(result.status === 200) {
-                setTransactions(result.data.transactions)
-            } 
+            try {
+                let result = await axios.get(`/transactions/${id}/office` , {headers: {token}})
+                if(result.status === 200) {
+                    setTransactions(result.data.transactions)
+                } 
+            } catch (error) {
+                console.log(error)
+            }
         })()
     }, [])
     
     return (
         <>
-            <table className="bg-white w-full hidden md:table shadow-md rounded-lg overflow-hidden">
+            <table className="bg-white dark:bg-gray-600 w-full hidden md:table shadow-md rounded-lg overflow-hidden">
                 <thead>
-                    <tr className="h-10 text-teal-500 bg-teal-50">
+                    <tr className="h-10 text-teal-500 bg-teal-50 dark:bg-teal-800 dark:text-teal-300">
                         <th>No</th>
                         <th>Nama</th>
                         <th>Poin</th>
@@ -107,7 +111,7 @@ const TableTransactionOffice = ({id}) => {
                 </thead>
                 <tbody>
                     {
-                        transactions.length ?
+                        transactions && transactions.length ?
                             transactions.map((item , i) => 
                                 <tr key={item._id}>
                                     <td className="text-center">{i+1}</td>
@@ -130,15 +134,15 @@ const TableTransactionOffice = ({id}) => {
                                 </tr>
                             )
                         : <tr>
-                            <td className="text-center" colSpan="5" >Tidak ada data</td>
+                            <td className="text-center h-10" colSpan="5" >Tidak ada data</td>
                         </tr>
                     }
                 </tbody>
             </table>
             
-            <div>
+            <div className="block md:hidden">
                 {
-                    transactions.length ?
+                    transactions && transactions.length ?
                         transactions.map(transaction => 
                             <div key={transaction._id} className="bg-white mb-4 rounded-md shadow-md p-4">
                                 <div className="flex justify-between">
@@ -272,7 +276,7 @@ const DetailOffice = () => {
     }, [])
     
     return (
-        <div className="text-gray-600">
+        <div className="text-gray-600 dark:text-gray-200">
             {
                 office ?
                 <>

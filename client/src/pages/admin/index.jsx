@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import {Route , Switch} from 'react-router-dom'
+import {Route , Switch , useHistory} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import Container from '../../components/admin/Container'
 import Sidebar from '../../components/admin/Sidebar'
@@ -10,10 +10,15 @@ import { fetchTransactionCount, fetchUsersCount } from '../../redux/actions/admi
 
 const Home = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
     useEffect(() => {
+        dispatch({type: "FROM_HOME_FALSE"})
         dispatch(fetchUsersCount()) 
         dispatch(fetchTransactionCount())       
     }, [])
+    useEffect(() => {
+        dispatch({ type: "SET_PATH", payload: { path: history.location.pathname } })
+    })
     return (
         <div>
             <Sidebar />
