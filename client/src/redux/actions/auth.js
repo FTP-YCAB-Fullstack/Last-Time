@@ -7,6 +7,7 @@ export const authLogin = (data) => {
             dispatch(setLogin(result.data))
             return {status: result.status}
         } catch (error) {
+            console.log(error)
             return {
                 status: error.response.status,
                 message: error.response.data.message,
