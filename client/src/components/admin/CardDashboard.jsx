@@ -22,7 +22,7 @@ const icons = {
 const CardDashboard = (props) => {
     let {number , text , color="teal" , icon="users"} = props
     return (
-        <div {...props} className={`text-${color}-300  shadow-md flex items-center gap-4 hover:bg-${color}-50 dark:hover:bg-${color}-900 hover:shadow-md transition duration-200 bg-gray-50 dark:bg-gray-700 rounded p-8 ` + props.className}>
+        <div {...props} className={props.className + ` text-${color}-300  shadow-md flex items-center gap-4 hover:bg-${color}-50 dark:hover:bg-${color}-900 hover:shadow-md transition duration-200 bg-gray-50 dark:bg-gray-700 rounded p-8 `}>
             <div className="w-1/4">
                 {icons[icon]}
             </div>

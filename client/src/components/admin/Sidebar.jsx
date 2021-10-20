@@ -50,7 +50,7 @@ const Sidebar = () => {
     return (
         <>
             <BtnSidebar status={toggleSidebar} toggle={toggle} />
-            <div className={(!toggleSidebar ? "-translate-x-full md:translate-x-0" : "translate-x-0")+" transform w-full transition duration-500 md:w-1/4 h-screen gap-2 fixed text-gray-600 dark:text-gray-200  shadow-lgbg-gray-50 bg-gray-50 shadow-md dark:bg-gray-700  z-40 divide-y-4"}>
+            <aside className={(!toggleSidebar ? "-translate-x-full md:translate-x-0" : "translate-x-0")+" transform w-full transition duration-500 md:w-1/4 h-screen gap-2 fixed text-gray-600 dark:text-gray-200  shadow-lgbg-gray-50 bg-gray-50 shadow-md dark:bg-gray-700  z-40 divide-y-4"}>
                 <div className="text-center py-5">
                     <h3 className="text-3xl font-black tracking-wider">Tiv Ash</h3>
                     <h5>Kreatif dengan Sampah</h5>
@@ -63,7 +63,7 @@ const Sidebar = () => {
                         Logout
                     </div>
                 </div>
-            </div>
+            </aside>
         </>
     )
 }
