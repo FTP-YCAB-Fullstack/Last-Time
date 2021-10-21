@@ -1,4 +1,6 @@
 # Last-Time
 
 ### Demo
-https://tivash.netlify.app
+frontend: https://tivash.netlify.app
+backend: https://server-tivash.herokuapp.com/
+
